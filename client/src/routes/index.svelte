@@ -1,2 +1,14 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import Home from '../components/home.svelte';
+</script>
+
+<Home />
+
+<style>
+	:global(body) {
+		padding: 0px;
+		margin: 0px;
+
+		font-family: 'Open Sans', sans-serif;
+	}
+</style>
