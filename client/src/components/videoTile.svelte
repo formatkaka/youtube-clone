@@ -13,7 +13,9 @@
 		<img class="poster__img" {src} alt="Picsum" />
 	</div>
 	<div class="video-tile__desc">
-		<img src="https://picsum.photos/35" alt="Logo" class="desc__logo" />
+		<div class="desc__logo-shadow">
+			<img src="https://picsum.photos/35" alt="Logo" class="desc__logo" />
+		</div>
 		<div class="desc flex-column">
 			<div class="desc__first flex-sb">
 				<p class="desc__title">
@@ -88,6 +90,16 @@
 
 		/* position: absolute; */
 		z-index: -1;
+	}
+
+	.desc__logo-shadow {
+		min-width: 35px;
+		height: 35px;
+		background: gray;
+		border-radius: 30px;
+
+		/* position: absolute; */
+		/* z-index: -1; */
 	}
 
 	.poster__img {

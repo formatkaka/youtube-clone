@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/formatkaka/youtube-clone/db"
 	"github.com/formatkaka/youtube-clone/routes"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -11,6 +12,7 @@ func main() {
 
 	router := gin.New()
 	router.Use(gin.Logger())
+	router.Use(cors.Default())
 	db.Init()
 
 	routes.FeedRoutes(router)
