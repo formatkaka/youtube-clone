@@ -63,5 +63,64 @@ func SignUp(ctx *gin.Context) {
 }
 
 func Login(ctx *gin.Context) {
+	var req models.LoginRequest
+
+	if err := ctx.BindJSON(&req); err != nil {
+		log.Fatal("bind issue signup request obj")
+		ctx.JSON(500, gin.H{
+			"error": "bind issue signup request obj",
+		})
+		return
+	}
+
+	client := db.GetClient()
+	var name, hash string
+	var id int64
+	query := "SELECT id, name, password FROM USERS WHERE email = $1"
+
+	rows, err := client.Query(query, req.Email)
+
+	if err != nil {
+		log.Println(err)
+		ctx.JSON(500, gin.H{
+			"error": err,
+		})
+	}
+
+	if rows.Next() {
+		if err := rows.Scan(&id, &name, &hash); err != nil {
+			panic(err)
+		}
+	} else {
+		ctx.JSON(500, gin.H{
+			"error": "Email does not exist",
+		})
+		return
+	}
+
+	userAuthenticated := helpers.CompareHash(req.Password, hash)
+	token, refreshToken, err := helpers.GenerateToken(req.Email, name, id)
+
+	if err != nil {
+		log.Println(err)
+		ctx.JSON(500, gin.H{
+			"err": err,
+		})
+		return
+	}
+
+	if userAuthenticated {
+		ctx.JSON(200, gin.H{
+			"token":        token,
+			"refreshToken": refreshToken,
+			"name":         name,
+			"email":        req.Email,
+		})
+		return
+	}
+
+	ctx.JSON(500, gin.H{
+		"error": "Invalid email or password",
+	})
 
 }
