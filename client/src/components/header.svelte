@@ -1,5 +1,7 @@
 <script>
 	import Icon from '@iconify/svelte';
+
+	let loggedIn = false;
 </script>
 
 <header class="header">
@@ -29,11 +31,19 @@
 		<div class="end">
 			<img class="svg" src="icons/videocam-outline.svg" alt="video create" />
 			<img class="svg" src="icons/notifications-outline.svg" alt="notifications" />
-			<img class="profile" src="https://picsum.photos/id/237/50/50" alt="profile pic" />
+
+			{#if !loggedIn}
+				<button class="login__button flex justify-around items-center	">
+					<img class="h-4/5" src="./icons/nav/login.svg" alt="login" />
+					<p class="font-medium text-base">SIGN IN</p>
+				</button>
+			{:else}
+				<img class="profile" src="https://picsum.photos/id/237/50/50" alt="profile pic" />
+			{/if}
 		</div>
 	</div>
 
-	<div class="header__tags">
+	<div class="header__tags no-scrollbar">
 		<!-- <p>Hello</p> -->
 		{#each Array(4) as _}
 			<button class="header__tags-btn">All</button>
@@ -99,7 +109,7 @@
 	}
 
 	.svg {
-		height: 30px;
+		height: 25px;
 	}
 
 	.logo {
@@ -122,7 +132,14 @@
 	.search__query {
 		width: 30vw;
 		border: 1px solid #ccc;
+		font-size: 14px;
+		padding: 0px 10px;
 	}
+
+	.search__query::placeholder {
+		font-size: 14px;
+	}
+
 	.search__icon {
 		height: 40px;
 		width: 60px;
@@ -152,14 +169,24 @@
 		gap: 25px;
 		justify-content: center;
 		align-items: center;
-		margin-right: 20px;
+		margin-right: 30px;
+	}
+	.login__button {
+		height: 40px;
+		width: 120px;
+		font-size: 12px;
+		border: 1px solid black;
+		padding: 5px 10px;
+		box-sizing: border-box;
+
+		font-family: Roboto;
 	}
 
 	.header__tags {
 		display: flex;
 		gap: 15px;
 		margin-left: 12vw;
-		overflow: scroll;
+		overflow-x: scroll;
 		width: 88vw;
 		height: 50%;
 		align-items: center;
