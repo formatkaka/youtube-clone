@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/formatkaka/youtube-clone/db"
@@ -13,9 +14,9 @@ func SignUp(ctx *gin.Context) {
 	var req models.SignUpRequest
 
 	if err := ctx.BindJSON(&req); err != nil {
-		log.Fatal("bind issue signup request obj")
+		log.Println("bind issue signup request obj : ", err)
 		ctx.JSON(500, gin.H{
-			"error": "bind issue signup request obj",
+			"error": fmt.Sprintf("bind issue signup request obj :  %s", err.Error()),
 		})
 		return
 	}
@@ -23,14 +24,12 @@ func SignUp(ctx *gin.Context) {
 	hash, err := helpers.GenerateHash(req.Password)
 
 	if err != nil {
-		log.Println(err)
+		log.Println("generate hash error in signup func ", err)
 		ctx.JSON(200, gin.H{
-			"error": err,
+			"error": fmt.Sprintf("generate hash error in signup func %s ", err),
 		})
 		return
 	}
-
-	log.Println("hash : ", hash)
 
 	client := db.GetClient()
 	var id int64
@@ -38,9 +37,11 @@ func SignUp(ctx *gin.Context) {
 	err = client.QueryRow(query, req.Name, req.Email, hash).Scan(&id)
 
 	if err != nil {
-		log.Println(err)
+		// how to return error that email already exists in db ??
+		// should I check if email exists and then put or try to analyse the error message
+		log.Println("unable to insert ", err)
 		ctx.JSON(500, gin.H{
-			"err": err,
+			"error": fmt.Sprintf("unable to insert %s ", err),
 		})
 		return
 	}
@@ -48,9 +49,10 @@ func SignUp(ctx *gin.Context) {
 	token, refreshToken, err := helpers.GenerateToken(req.Email, req.Name, id)
 
 	if err != nil {
-		log.Println(err)
+		log.Println("signup request : ", err)
 		ctx.JSON(500, gin.H{
-			"err": err,
+			"error":  fmt.Sprintf("signup request : %s", err),
+			"status": helpers.TOKEN_ERROR,
 		})
 		return
 	}
@@ -66,9 +68,9 @@ func Login(ctx *gin.Context) {
 	var req models.LoginRequest
 
 	if err := ctx.BindJSON(&req); err != nil {
-		log.Fatal("bind issue signup request obj")
+		log.Println("bind issue login request obj : ", err)
 		ctx.JSON(500, gin.H{
-			"error": "bind issue signup request obj",
+			"error": fmt.Sprintf("bind issue login request obj :  %s", err.Error()),
 		})
 		return
 	}
@@ -89,11 +91,12 @@ func Login(ctx *gin.Context) {
 
 	if rows.Next() {
 		if err := rows.Scan(&id, &name, &hash); err != nil {
-			panic(err)
+			log.Println("ERROR: login rows Scan : ", err)
 		}
 	} else {
 		ctx.JSON(500, gin.H{
-			"error": "Email does not exist",
+			"error":  "Email does not exist",
+			"status": helpers.EMAIL_NOT_EXIST,
 		})
 		return
 	}
@@ -102,9 +105,10 @@ func Login(ctx *gin.Context) {
 	token, refreshToken, err := helpers.GenerateToken(req.Email, name, id)
 
 	if err != nil {
-		log.Println(err)
+		log.Println("login func : ", err)
 		ctx.JSON(500, gin.H{
-			"err": err,
+			"error":  fmt.Sprintf("login function token : %s", err.Error()),
+			"status": helpers.TOKEN_ERROR,
 		})
 		return
 	}
@@ -119,8 +123,9 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(500, gin.H{
-		"error": "Invalid email or password",
+	ctx.JSON(200, gin.H{
+		"error":     "Invalid email or password",
+		"errorcode": helpers.INVALID_LOGIN_CREDS,
 	})
 
 }

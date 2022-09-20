@@ -32,6 +32,8 @@ func Init() {
 	client, err = sql.Open("postgres", url)
 
 	if err != nil {
+		// unable to connect to DB
+		// critical error
 		log.Fatal(err)
 	}
 

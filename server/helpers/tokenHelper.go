@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"time"
@@ -37,14 +38,14 @@ func GenerateToken(email string, name string, uid int64) (string, string, error)
 
 	if err != nil {
 		log.Println(err)
-		return "", "", err
+		return "", "", fmt.Errorf("token generation error in GenerateToken : %w", err)
 	}
 
 	refreshToken, err := jwt.NewWithClaims(jwt.SigningMethodHS256, refreshClaims).SignedString([]byte(SECRET_KEY))
 
 	if err != nil {
 		log.Println(err)
-		return "", "", err
+		return "", "", fmt.Errorf("refresh token generation error in GenerateToken : %w", err)
 	}
 
 	return token, refreshToken, nil
