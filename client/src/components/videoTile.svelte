@@ -22,10 +22,12 @@
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat.
 				</p>
 			</div>
-			<div class="flex-column">
+			<div class="desc__stats flex-column">
 				<p class="desc__channel-name">Channel Name</p>
+				<span class="show-in-mobile">&#183;</span>
 				<div class="desc__third flex-sb">
 					<p class="desc__views">538K views</p>
+					<span class="show-in-mobile">&#183;</span>
 					<p class="desc__upload-info">8 days ago</p>
 				</div>
 			</div>
@@ -107,5 +109,39 @@
 		position: absolute;
 		top: 0px;
 		left: 0px;
+	}
+
+	.show-in-mobile {
+		display: none;
+	}
+
+	@media (max-width: 600px) {
+		.video-tile__desc {
+			align-items: center;
+			justify-content: center;
+
+			font-size: 12px;
+			padding: 10px;
+		}
+
+		.desc__stats {
+			flex-direction: unset;
+			gap: 5px;
+			position: relative;
+		}
+
+		.desc__title {
+			font-weight: bold;
+		}
+
+		.desc {
+			gap: 2px;
+		}
+
+		.show-in-mobile {
+			display: unset;
+			font-size: 14px;
+			font-weight: bold;
+		}
 	}
 </style>

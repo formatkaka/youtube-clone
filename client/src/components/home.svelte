@@ -77,9 +77,13 @@
 		background: #f9f9f9;
 	}
 
-	@media (max-width: 700px) {
+	@media (max-width: 600px) {
 		.feed {
+			left: 0px;
+			width: 100vw;
+			padding: 30px 0px;
 			grid-template-columns: repeat(1, 1fr);
+			row-gap: unset;
 		}
 	}
 </style>

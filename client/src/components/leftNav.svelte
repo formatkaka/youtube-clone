@@ -176,4 +176,10 @@
 		font-family: Roboto;
 		margin-left: 20px;
 	}
+
+	@media (max-width: 600px) {
+		.nav {
+			display: none;
+		}
+	}
 </style>
