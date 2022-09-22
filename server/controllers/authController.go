@@ -75,6 +75,8 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
+	fmt.Println("req : ", req)
+
 	client := db.GetClient()
 	var name, hash string
 	var id int64
@@ -123,7 +125,7 @@ func Login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(200, gin.H{
+	ctx.JSON(401, gin.H{
 		"error":     "Invalid email or password",
 		"errorcode": helpers.INVALID_LOGIN_CREDS,
 	})

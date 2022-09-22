@@ -42,7 +42,10 @@ func GetFeed(ctx *gin.Context) {
 
 	client := db.GetClient()
 
-	query := `SELECT id, title, video_url, poster, duration, views, user_id, created_at  FROM videos LIMIT $1 OFFSET $2`
+	query := `SELECT title, video_url, poster, name, duration, views, videos.created_at  
+				FROM videos 
+				JOIN users ON users.id = videos.user_id
+				LIMIT $1 OFFSET $2`
 	rows, err := client.Query(query, limitInt, pageInt*limitInt)
 
 	if err != nil {
@@ -50,11 +53,11 @@ func GetFeed(ctx *gin.Context) {
 	}
 	defer rows.Close()
 
-	var feed []models.Video
+	var feed []models.FeedObject
 
 	for rows.Next() {
-		var video models.Video
-		if err := rows.Scan(&video.ID, &video.Title, &video.Video_url, &video.Poster, &video.Duration, &video.Views, &video.User_id, &video.Created_at); err != nil {
+		var video models.FeedObject
+		if err := rows.Scan(&video.Title, &video.Video_url, &video.Poster, &video.Name, &video.Duration, &video.Views, &video.Created_at); err != nil {
 			panic(err)
 		}
 		feed = append(feed, video)

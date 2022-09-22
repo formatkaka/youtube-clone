@@ -17,6 +17,7 @@ func main() {
 
 	routes.FeedRoutes(router)
 	routes.AuthRoutes(router)
+	routes.UserRoutes(router)
 
 	router.GET("/ping", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{"response": "pong"})

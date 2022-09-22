@@ -2,17 +2,16 @@ package models
 
 import "time"
 
-type Video struct {
-	ID         int       `json: "id"`
+type FeedObject struct {
 	Title      string    `json: "title"`
 	Video_url  string    `json: "video_url"`
 	Poster     string    `json: "poster"`
-	User_id    int       `json: "user_id"`
+	Name       string    `json: "name"`
 	Duration   int       `json: "duration"`
 	Views      int       `json: "views"`
 	Created_at time.Time `json: "created_at"`
 }
 
 type Feed struct {
-	feed []Video
+	feed []FeedObject
 }
