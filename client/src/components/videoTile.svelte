@@ -1,4 +1,12 @@
 <script>
+	// @ts-nocheck
+
+	import { secondsToHms } from '../utils/time';
+
+	export /**
+	 * @type {{ [x: string]: any; }}
+	 */
+	let data;
 	let arr = [1001, 1002, 1003, 1004, 1005, 1006, 1008, 1009, 100, 101];
 	function randomIntFromInterval(min, max) {
 		// min and max included
@@ -11,6 +19,7 @@
 <div class="video-tile flex-column">
 	<div class="video-tile__poster">
 		<img class="poster__img" {src} alt="Picsum" />
+		<div class="poster__duration">{secondsToHms(data['Duration'])}</div>
 	</div>
 	<div class="video-tile__desc">
 		<div class="desc__logo-shadow">
@@ -19,11 +28,11 @@
 		<div class="desc flex-column">
 			<div class="desc__first flex-sb">
 				<p class="desc__title">
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut feugiat.
+					{data['Title']}
 				</p>
 			</div>
 			<div class="desc__stats flex-column">
-				<p class="desc__channel-name">Channel Name</p>
+				<p class="desc__channel-name">{data['Name']}</p>
 				<span class="show-in-mobile">&#183;</span>
 				<div class="desc__third flex-sb">
 					<p class="desc__views">538K views</p>
@@ -109,6 +118,18 @@
 		position: absolute;
 		top: 0px;
 		left: 0px;
+	}
+
+	.poster__duration {
+		position: absolute;
+		right: 5px;
+		bottom: 5px;
+
+		background-color: black;
+		font-size: 12px;
+		color: white;
+
+		padding: 2px 5px;
 	}
 
 	.show-in-mobile {

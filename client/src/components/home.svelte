@@ -49,7 +49,7 @@
 
 <div class="feed">
 	{#each Array(feed.length) as _, i}
-		<VideoTile />
+		<VideoTile data={feed[i]} />
 	{/each}
 </div>
 <div class="continuation-row">

@@ -1,5 +1,23 @@
+<script context="module">
+	export async function load({ session }) {
+		// console.log('🚀 ~ file: index.svelte ~ line 3 ~ load ~ ctx', session);
+		return {
+			props: {
+				token: session.user.username
+			}
+		};
+	}
+</script>
+
 <script>
+	// @ts-nocheck
+
 	import Home from '../components/home.svelte';
+
+	// export const ssr = false;
+	export let token;
+	console.log('🚀 ~ file: index.svelte ~ line 19 ~ user', token);
+	// console.log('🚀 ~ file: index.svelte ~ line 18 ~ data', data);
 </script>
 
 <!-- <p class="text-3xl ">Hello world!</p> -->

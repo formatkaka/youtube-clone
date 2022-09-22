@@ -1,6 +1,8 @@
 <script>
 	// @ts-nocheck
 	import { validateEmail } from '../utils/validation';
+	import * as services from '../services/auth';
+	import { user } from '../stores/user';
 
 	export let closePopup;
 	let email = '',
@@ -30,9 +32,13 @@
 		email = '';
 		password = '';
 		name = '';
+		isEmailErr = false;
+		isPasswordErr = false;
+		isNameErr = false;
+		submitErr = false;
 	}
 
-	function signIn(evt) {
+	async function signIn(evt) {
 		evt.stopPropagation();
 		isEmailErr = !validateEmail(email);
 		isPasswordErr = password.length < 8;
@@ -40,15 +46,22 @@
 
 		if (formDataValidates) {
 			isLoading = true;
+			let data;
 			// simulate api request
-			setTimeout(() => {
+			try {
+				data = await services.SignIn(email, password);
+				closePopup();
+				user.loginUser(data);
 				isLoading = false;
-			}, 1000);
-			console.log('login with : ', email, password);
+			} catch (err) {
+				// console.log('🚀 ~ file: login.svelte ~ line 57 ~ signIn ~ err', JSON.stringify(err));
+				submitErr = err;
+				isLoading = false;
+			}
 		}
 	}
 
-	function signUp(evt) {
+	async function signUp(evt) {
 		evt.stopPropagation();
 		isEmailErr = !validateEmail(email);
 		isPasswordErr = password.length < 8;
@@ -58,11 +71,18 @@
 
 		if (formDataValidates) {
 			isLoading = true;
+			let data;
 			// simulate api request
-			setTimeout(() => {
+			try {
+				data = await services.SignUp(email, password, name);
+				user.loginUser(data);
+				closePopup();
 				isLoading = false;
-			}, 1000);
-			console.log('signup with : ', email, password, name);
+			} catch (err) {
+				submitErr = err;
+				isLoading = false;
+			}
+			console.log('signup with : ', data);
 		}
 	}
 </script>
@@ -146,16 +166,28 @@
 
 			<div class="flex mt-10 justify-center">
 				<p>I'm a new user</p>
-				<button class="text-rose-500 ml-2" on:click={toggleMode}>Sign up</button>
+				<button
+					class="text-rose-500 ml-2 border-0 border-b-2 border-rose-500 border-solid
+				"
+					on:click={toggleMode}>Sign up</button
+				>
 			</div>
 		{:else}
-			<button class="my-5 border-black border-2 border-solid px-5 py-2 rounded" on:click={signUp}
+			<button class="my-5 border-black  border-2 border-solid px-5 py-2 rounded" on:click={signUp}
 				>SIGN UP</button
 			>
 			<div class="flex mt-10 justify-center">
 				<p>Go back to</p>
-				<button class="text-rose-500 ml-2" on:click={toggleMode}>Sign in</button>
+				<button
+					class="text-rose-500 ml-2 border-0 border-b-2 border-rose-500 border-solid
+				"
+					on:click={toggleMode}>Sign in</button
+				>
 			</div>
+		{/if}
+
+		{#if submitErr}
+			<p class="text-rose-500">{submitErr}</p>
 		{/if}
 	</div>
 </div>

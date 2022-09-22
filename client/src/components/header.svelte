@@ -1,5 +1,5 @@
 <script>
-	import Icon from '@iconify/svelte';
+	import { user } from '../stores/user';
 	import Login from './login.svelte';
 
 	let loggedIn = false;
@@ -38,7 +38,7 @@
 			<img class="svg hide-in-mobile" src="icons/videocam-outline.svg" alt="video create" />
 			<img class="svg hide-in-mobile" src="icons/notifications-outline.svg" alt="notifications" />
 
-			{#if !loggedIn}
+			{#if !$user.isLoggedIn}
 				<button class="login__button flex justify-around items-center	" on:click={togglePopup}>
 					<img class="h-4/5" src="./icons/nav/login.svg" alt="login" />
 					<p class="hide-in-mobile font-medium text-base">LOG IN</p>
