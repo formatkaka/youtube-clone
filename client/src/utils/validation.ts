@@ -6,7 +6,15 @@ function validateEmail (email: string) {
       );
   };
 
+  function validatePassword(password: string){
+    return password.length > 8
+  }
+  function validateName(name: string){
+    return name.length > 2
+  }
 
 export  {
-  validateEmail
+  validateName,
+  validateEmail,
+  validatePassword
 }

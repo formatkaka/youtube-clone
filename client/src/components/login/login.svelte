@@ -3,13 +3,13 @@
 	import { validateEmail } from '@utils/validation';
 	import * as services from '@services/auth';
 	import { user } from '@stores/user';
+	import Input from './input.svelte';
 
 	export let closePopup;
 	let email = '',
 		password = '',
 		name = '';
 	let isEmailErr, isPasswordErr, isNameErr, submitErr;
-	let nameErr = 'Name should contain minimum 2 characters';
 
 	const SIGN_IN = 'SIGN_IN';
 	const SIGN_UP = 'SIGN_UP';
@@ -85,6 +85,20 @@
 			console.log('signup with : ', data);
 		}
 	}
+
+	function handleInput(evt) {
+		switch (evt.target.dataset.label) {
+			case 'Name':
+				name = evt.target.value;
+				break;
+			case 'Email':
+				email = evt.target.value;
+				break;
+			case 'Password':
+				password = evt.target.value;
+				break;
+		}
+	}
 </script>
 
 <div
@@ -111,49 +125,15 @@
 
 		{#if mode === SIGN_UP}
 			<div class="my-5 w-full flex flex-col">
-				<label class="text-left" for="name-input">Name</label>
-				<input
-					id="name-input"
-					class=" border-black border-2 border-solid px-5 py-2 rounded"
-					type="text"
-					placeholder="Enter your name"
-					required
-					bind:value={name}
-				/>
+				<Input inpType="name" inpValue={name} isErr={isNameErr} {handleInput} />
 			</div>
 		{/if}
 
 		<div class="my-5 w-full flex flex-col">
-			<label class="text-left" for="email-input">Email</label>
-			<input
-				required
-				type="text"
-				id="email-input"
-				bind:value={email}
-				placeholder="Enter your email"
-				class={`border-black border-2 border-solid px-5 py-2 rounded ${
-					isEmailErr ? 'border-rose-800	' : ''
-				}`}
-			/>
-			{#if isEmailErr}
-				<p class="text-left text-sm">Add proper email</p>
-			{/if}
+			<Input inpType="email" inpValue={email} isErr={isEmailErr} {handleInput} />
 		</div>
 		<div class="my-5 w-full flex flex-col">
-			<label class="text-left" for="password-input">Password</label>
-			<input
-				required
-				type="password"
-				id="password-input"
-				bind:value={password}
-				placeholder="Enter your password"
-				class={`border-black border-2 border-solid px-5 py-2 rounded ${
-					isPasswordErr ? 'border-rose-800	' : ''
-				}`}
-			/>
-			{#if isPasswordErr}
-				<p class="text-left text-sm">Password should be minimum 8 characters</p>
-			{/if}
+			<Input inpType="password" inpValue={password} isErr={isPasswordErr} {handleInput} />
 			{#if mode === SIGN_IN}
 				<button class="self-end">Forgot password ?</button>
 			{/if}
