@@ -1,4 +1,4 @@
-import { setTokenCookies, clearTokenCookies } from "../utils/cookie";
+import { setTokenCookies, clearTokenCookies } from "@utils/cookie";
 import { writable } from "svelte/store";
 import { browser } from '$app/environment'
 

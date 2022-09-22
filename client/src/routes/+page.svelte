@@ -1,7 +1,7 @@
 <script>
-	import Home from '../components/home.svelte';
+	import Home from '@components/home.svelte';
 	import { page } from '$app/stores';
-	import { user } from '../stores/user';
+	import { user } from '@stores/user';
 
 	if ($page.data.user) {
 		user.loginUser($page.data.user);

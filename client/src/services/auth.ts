@@ -1,5 +1,5 @@
-import { getTokenCookies } from "../utils/cookie";
-import { BASE_URL } from "../utils/consts"
+import { getTokenCookies } from "@utils/cookie";
+import { BASE_URL } from "@utils/consts"
 
 async function SignIn(email: string, password: string){
 

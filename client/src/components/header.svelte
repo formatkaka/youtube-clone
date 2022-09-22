@@ -1,8 +1,7 @@
 <script>
-	import { user } from '../stores/user';
-	import Login from './login.svelte';
+	import { user } from '@stores/user';
+	import Login from '@components/login/login.svelte';
 
-	let loggedIn = false;
 	let showLoginPopup = false;
 
 	function togglePopup() {

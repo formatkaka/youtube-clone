@@ -1,7 +1,7 @@
 <script>
 	// @ts-nocheck
 
-	import { secondsToHms } from '../utils/time';
+	import { secondsToHms } from '@utils/time';
 
 	export /**
 	 * @type {{ [x: string]: any; }}

@@ -1,8 +1,8 @@
 <script>
 	// @ts-nocheck
-	import { validateEmail } from '../utils/validation';
-	import * as services from '../services/auth';
-	import { user } from '../stores/user';
+	import { validateEmail } from '@utils/validation';
+	import * as services from '@services/auth';
+	import { user } from '@stores/user';
 
 	export let closePopup;
 	let email = '',

@@ -1,5 +1,5 @@
 import * as cookie from 'cookie';
-import { getUserDetails } from '../services/auth';
+import { getUserDetails } from '@services/auth';
 
 export async function load({request}: any) {
     const cookieHeader = request.headers.get('cookie');

@@ -1,5 +1,3 @@
-<script></script>
-
 <div class="tile-skeleton">
 	<div class="tile-skeleton__poster" />
 	<div class="tile-skeleton__desc">
