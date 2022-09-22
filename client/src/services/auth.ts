@@ -73,13 +73,22 @@ function SignUp(email: string, password: string, name: string){
     // })
 }
 
-async function attemptLogin(){
-
-    const {token} = getTokenCookies()
+async function getUserDetails(userToken: string){
+    const {token = userToken}: any = getTokenCookies()
 
     if(!token) return null
 
-    const response = await fetch(`${BASE_URL}/user`)
+    const myHeaders = new Headers();
+    myHeaders.append("token", token);
+
+
+    const requestOptions: any = {
+        method: 'GET',
+        headers: myHeaders,
+        redirect: 'follow'
+    };
+
+    const response = await fetch(`${BASE_URL}/user`, requestOptions)
     
     if(!response.ok) return null
 
@@ -91,5 +100,5 @@ async function attemptLogin(){
 export {
     SignIn,
     SignUp,
-    attemptLogin
+    getUserDetails
 }

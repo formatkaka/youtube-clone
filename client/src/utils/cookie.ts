@@ -1,4 +1,4 @@
-// import  from '@sveltejs/kit'
+import { browser } from '$app/environment'
 
 function setTokenCookies(token: string, refreshToken: string){
 
@@ -8,6 +8,9 @@ function setTokenCookies(token: string, refreshToken: string){
 }
 
 function getTokenCookies(){
+
+    if(!browser) return {};
+
     let token;
     let refreshToken;
     // if(browser){

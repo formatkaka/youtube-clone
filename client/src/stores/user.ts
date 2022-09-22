@@ -1,13 +1,10 @@
 import { setTokenCookies, clearTokenCookies } from "../utils/cookie";
 import { writable } from "svelte/store";
-import { session } from '$app/stores'
-// import { attemptLogin } from "../services/auth";
+import { browser } from '$app/environment'
 
 
 
 function User(){
-    console.log("user ts : ", session)
-    // const initialUserState = await attemptLogin()
 
     const { subscribe, update } = writable({
         isLoggedIn: false,
@@ -17,7 +14,7 @@ function User(){
     return {
 
         loginUser: function(user: any){
-            setTokenCookies(user.token, user.refreshToken)
+            if(browser) setTokenCookies(user.token, user.refreshToken)
             update(() => (
                  {
                     isLoggedIn: true,
