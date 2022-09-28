@@ -5,6 +5,18 @@ Instructions to run
 
     git clone https://github.com/formatkaka/youtube-clone/
 
+## Run with docker
+
+    // Build
+    docker build -t yt-db-1 Dockerfile.db . 
+    docker build -t yt-sv-1 Dockerfile.server .
+    docker build -t yt-cl-1 Dockerfile.client .  
+
+    // Run
+    docker run -d -p 5431:5432 yt-db-1
+    docker run -d -p 8080:8080 yt-sv-1
+    docker run -d -p 5173:5173 yt-cl-2
+
 ### Set up DB
 
     Install psql locally

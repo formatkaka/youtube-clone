@@ -23,7 +23,7 @@ func Init() {
 		DBUserName: "postgres",
 		DBPassword: "postgres",
 		DBHost:     "localhost",
-		DBPort:     "5432",
+		DBPort:     "5431",
 		DBName:     "youtube",
 	}
 
