@@ -22,7 +22,7 @@ func Init() {
 	config := DBConfig{
 		DBUserName: "postgres",
 		DBPassword: "postgres",
-		DBHost:     "localhost",
+		DBHost:     "host.docker.internal",
 		DBPort:     "5431",
 		DBName:     "youtube",
 	}
