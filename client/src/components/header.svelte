@@ -1,6 +1,7 @@
 <script>
 	import { user } from '@stores/user';
 	import Login from '@components/login/login.svelte';
+	import Img from './common/img.svelte';
 
 	let showLoginPopup = false;
 
@@ -12,51 +13,44 @@
 <header class="header z-10">
 	<div class="header__top">
 		<div class="start">
-			<img class="hide-in-mobile svg" alt="hamburger" src="icons/menu-outline.svg" />
+			<Img className="hidden sm:block h-6" alt="hamburger" src="icons/menu-outline.svg" />
 			<div class="logo">
-				<img class="svg logo__img" src="icons/logo-youtube.svg" alt="youtube logo" />
+				<Img className="h-6 logo__img" src="icons/logo-youtube.svg" alt="youtube logo" />
 				<p class="logo__name">Youtube</p>
 			</div>
 		</div>
 		<div class="search">
 			<input
-				class="search__query hide-in-mobile"
+				class="search__query hidden sm:block"
 				type="text"
 				name="search__text"
 				id="search__text"
 				placeholder="Search"
 			/>
 			<button class="search__icon">
-				<img class="search__icon-img" src="icons/search-outline.svg" alt="search icon" />
+				<Img className="h-5" src="icons/search-outline.svg" alt="search icon" />
 			</button>
-			<button class="search__mic hide-in-mobile">
-				<img class="svg search__mic-img" src="icons/mic.svg" alt="mic" />
+			<button class="search__mic hidden sm:block">
+				<Img className="h-6 search__mic-img" src="icons/mic.svg" alt="mic" />
 			</button>
 		</div>
 		<div class="end">
-			<img class="svg hide-in-mobile" src="icons/videocam-outline.svg" alt="video create" />
-			<img class="svg hide-in-mobile" src="icons/notifications-outline.svg" alt="notifications" />
+			<Img className="h-6 hidden sm:block" src="icons/videocam-outline.svg" alt="video create" />
+			<Img
+				className="h-6 hidden sm:block"
+				src="icons/notifications-outline.svg"
+				alt="notifications"
+			/>
 
 			{#if !$user.isLoggedIn}
 				<button class="login__button flex justify-around items-center	" on:click={togglePopup}>
-					<img class="h-4/5" src="./icons/nav/login.svg" alt="login" />
-					<p class="hide-in-mobile font-medium text-base">LOG IN</p>
+					<Img className="h-4/5" src="./icons/nav/login.svg" alt="login" />
+					<p class="hidden sm:block font-medium text-base">LOG IN</p>
 				</button>
 			{:else}
-				<img class="profile" src="https://picsum.photos/id/237/50/50" alt="profile pic" />
+				<Img className="profile" src="https://picsum.photos/id/237/50/50" alt="profile pic" />
 			{/if}
 		</div>
-	</div>
-
-	<div class="header__tags no-scrollbar">
-		<!-- <p>Hello</p> -->
-		{#each Array(4) as _}
-			<button class="header__tags-btn">All</button>
-			<button class="header__tags-btn">Mixes</button>
-			<button class="header__tags-btn">Music</button>
-			<button class="header__tags-btn">Bollywood</button>
-			<button class="header__tags-btn">Street Food</button>
-		{/each}
 	</div>
 
 	{#if showLoginPopup}
@@ -66,7 +60,7 @@
 
 <style>
 	.header {
-		height: 120px;
+		height: 60px;
 		width: 100vw;
 		/* max-height: 120px; */
 
@@ -164,7 +158,7 @@
 		width: 40px;
 		margin-left: 5px;
 	}
-	.search__icon-img {
+	.search__iconh-5 {
 		height: 20px;
 	}
 
