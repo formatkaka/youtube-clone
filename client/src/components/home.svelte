@@ -54,7 +54,7 @@
 		<button class="header__tags-btn">Street Food</button>
 	{/each}
 </div>
-<!-- <Header /> -->
+
 <Nav />
 
 <div class="feed">
