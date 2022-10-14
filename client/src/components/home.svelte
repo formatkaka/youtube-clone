@@ -4,6 +4,7 @@
 	import VideoTile from './videoTile.svelte';
 	import VideoTileSkeleton from './videoTileSkeleton.svelte';
 	import { onMount } from 'svelte';
+	import CategoryTag from './common/categoryTag.svelte';
 
 	/**
 	 * @type {string | any[]}
@@ -47,11 +48,11 @@
 <div class="header__tags no-scrollbar">
 	<!-- <p>Hello</p> -->
 	{#each Array(4) as _}
-		<button class="header__tags-btn">All</button>
-		<button class="header__tags-btn">Mixes</button>
-		<button class="header__tags-btn">Music</button>
-		<button class="header__tags-btn">Bollywood</button>
-		<button class="header__tags-btn">Street Food</button>
+		<CategoryTag tagName="All" selected={true} />
+		<CategoryTag tagName="Mixes" />
+		<CategoryTag tagName="Music" />
+		<CategoryTag tagName="Bollywood" />
+		<CategoryTag tagName="Street Food" />
 	{/each}
 </div>
 
