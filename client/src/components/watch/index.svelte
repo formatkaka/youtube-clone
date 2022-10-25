@@ -4,13 +4,13 @@
 	import VideoMeta from './videoMeta/index.svelte';
 </script>
 
-<div class="flex w-screen px-12 gap-6 mt-4">
-	<div class="w-9/12">
+<div class="flex flex-col w-screen px-0 sm:px-12 gap-6 mt-4 sm:flex-row">
+	<div class="w-full sm:w-9/12">
 		<VideoPlayer />
 		<VideoMeta />
 	</div>
 
-	<div class="w-1/4">
+	<div class="w-full sm:w-1/4">
 		<VideoSuggestions />
 	</div>
 </div>
