@@ -103,7 +103,7 @@
 	};
 </script>
 
-<nav class="nav">
+<nav class="fixed left-0 flex h-left_nav flex-col overflow-y-scroll items-center justify-start w-left_nav">
 	{#each Object.values(nav) as section}
 		<div class="nav__section">
 			{#each section as item}
@@ -118,19 +118,6 @@
 
 <style>
 	.nav {
-		position: fixed;
-		left: 0px;
-		top: 60px;
-
-		height: calc(100vh - 60px);
-
-		width: 12vw;
-
-		/* background-color: burlywood; */
-
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
 
 		flex-direction: column;
 
@@ -150,8 +137,6 @@
 		width: 100%;
 
 		box-sizing: border-box;
-
-		padding: 10px 0px;
 	}
 
 	.item {

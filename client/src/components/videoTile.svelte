@@ -16,28 +16,28 @@
 	let src = `https://picsum.photos/id/${arr[rand]}/350/200`;
 </script>
 
-<div class="video-tile flex-column">
-	<div class="video-tile__poster">
-		<img class="poster__img" {src} alt="Picsum" />
-		<div class="poster__duration">{secondsToHms(data['Duration'])}</div>
+<div class="video-tile flex-column cursor-pointer">
+	<div class="video-tile__poster rounded-lg">
+		<img class="absolute top-0 left-0 w-full rounded-xl" {src} alt="Picsum" />
+		<div class="poster__duration rounded-sm">{secondsToHms(data['Duration'])}</div>
 	</div>
 	<div class="video-tile__desc">
 		<div class="desc__logo-shadow">
 			<img src="https://picsum.photos/35" alt="Logo" class="desc__logo" />
 		</div>
-		<div class="desc flex-column">
+		<div class="flex flex-column gap-1">
 			<div class="desc__first flex-sb">
-				<p class="desc__title">
+				<p class="line-clamp-2 font-medium">
 					{data['Title']}
 				</p>
 			</div>
-			<div class="desc__stats flex-column">
-				<p class="desc__channel-name">{data['Name']}</p>
+			<div class="desc__stats flex-column text-gray-700 text-sm font-medium">
+				<p class="desc__channel-name ">{data['Name']}</p>
 				<span class="show-in-mobile">&#183;</span>
 				<div class="desc__third flex-sb">
 					<p class="desc__views">538K views</p>
 					<span class="show-in-mobile">&#183;</span>
-					<p class="desc__upload-info">8 days ago</p>
+					<p class="desc__upload-info ">8 days ago</p>
 				</div>
 			</div>
 		</div>
@@ -48,9 +48,6 @@
 	.flex-column {
 		display: flex;
 		flex-direction: column;
-	}
-
-	.video-title {
 	}
 
 	.video-tile__desc {
@@ -74,18 +71,12 @@
 		margin: 0px;
 	}
 
-	.desc__first {
-		height: 35px;
-	}
 
 	.desc__third {
 		justify-content: flex-start;
 		gap: 5px;
 	}
 
-	.desc {
-		gap: 10px;
-	}
 
 	.video-tile__poster {
 		position: relative;
@@ -98,9 +89,8 @@
 		width: 100%;
 		padding-top: 57.1%;
 		background-color: gray;
-
-		/* position: absolute; */
 		z-index: -1;
+    border-radius: 1rem;
 	}
 
 	.desc__logo-shadow {
@@ -108,17 +98,13 @@
 		height: 35px;
 		background: gray;
 		border-radius: 30px;
-
-		/* position: absolute; */
-		/* z-index: -1; */
 	}
 
-	.poster__img {
-		width: 100%;
-		position: absolute;
-		top: 0px;
-		left: 0px;
-	}
+	.desc__upload-info::before {
+    content: '•';
+    color: var(--gray-700);
+    margin-right: 4px;
+  }
 
 	.poster__duration {
 		position: absolute;

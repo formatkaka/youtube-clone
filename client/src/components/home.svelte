@@ -45,47 +45,43 @@
 	}
 </script>
 
-<div class="header__tags no-scrollbar">
-	<!-- <p>Hello</p> -->
-	{#each Array(4) as _}
-		<CategoryTag tagName="All" selected={true} />
-		<CategoryTag tagName="Mixes" />
-		<CategoryTag tagName="Music" />
-		<CategoryTag tagName="Bollywood" />
-		<CategoryTag tagName="Street Food" />
-	{/each}
+
+
+<div class="flex w-full mt-4">
+  <Nav />
+
+  <div class="flex flex-col gap-8 ml-left_nav w-feed px-5">
+    <div class="flex gap-4 w-full no-scrollbar pr-5">
+      {#each Array(4) as _}
+        <CategoryTag tagName="All" selected={true} />
+        <CategoryTag tagName="Mixes" />
+        <CategoryTag tagName="Music" />
+        <CategoryTag tagName="Bollywood" />
+        <CategoryTag tagName="Street Food" />
+      {/each}
+    </div>
+
+    <div class="feed w-full grid-cols-1 sm:grid-cols-3 2xl:grid-cols-4">
+      {#each Array(feed.length) as _, i}
+        <VideoTile data={feed[i]} />
+      {/each}
+      {#each Array(8) as _, i}
+        <VideoTileSkeleton />
+      {/each}
+    </div>
+
+    <div class="continuation-row" />
+  </div>
 </div>
-
-<Nav />
-
-<div class="feed">
-	{#each Array(feed.length) as _, i}
-		<VideoTile data={feed[i]} />
-	{/each}
-	{#each Array(8) as _, i}
-		<VideoTileSkeleton />
-	{/each}
-</div>
-
-<div class="continuation-row" />
 
 <style>
 	.feed,
 	.continuation-row {
 		position: relative;
-		left: 12vw;
 
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
 		column-gap: 20px;
 		row-gap: 40px;
-
-		padding: 20px 30px;
-
-		width: 88vw;
-		box-sizing: border-box;
-
-		background: #f9f9f9;
 	}
 
 	.header__tags {
@@ -124,7 +120,6 @@
 			left: 0px;
 			width: 100vw;
 			padding: 30px 0px;
-			grid-template-columns: repeat(1, 1fr);
 			row-gap: unset;
 		}
 

@@ -1,7 +1,7 @@
 <script>
 	// @ts-nocheck
 
-	const BASE_URL = 'https://ytspaces.sgp1.digitaloceanspaces.com/static/';
+	const BASE_URL = '/';
 	export let src, alt, className;
 </script>
 

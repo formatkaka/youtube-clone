@@ -19,20 +19,22 @@
 				<p class="logo__name">Youtube</p>
 			</div>
 		</div>
-		<div class="search">
-			<input
-				class="search__query hidden sm:block"
+		<div class="flex items-center gap-4 rounded-lg">
+      <div class="flex">
+        <input
+				class="search__query hidden rounded-l-full sm:block focus:outline-none focus:border-indigo-500"
 				type="text"
 				name="search__text"
 				id="search__text"
 				placeholder="Search"
-			/>
-			<button class="search__icon">
-				<Img className="h-5" src="icons/search-outline.svg" alt="search icon" />
-			</button>
-			<button class="search__mic hidden sm:block">
-				<Img className="h-6 search__mic-img" src="icons/mic.svg" alt="mic" />
-			</button>
+        />
+        <button class="search__icon rounded-r-full">
+          <Img className="h-5" src="icons/search-outline.svg" alt="search icon" />
+        </button>
+      </div>
+      <button class="sm:flex rounded-full items-center justify-center w-10 h-10 bg-gray-100 hidden">
+        <Img className="h-6 search__mic-img" src="icons/mic.svg" alt="mic" />
+      </button>
 		</div>
 		<div class="end">
 			<Img className="h-6 hidden sm:block" src="icons/videocam-outline.svg" alt="video create" />
